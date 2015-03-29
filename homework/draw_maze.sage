@@ -11,6 +11,13 @@ def draw_maze(s):
     g.axes(False)
     return g
 
+def animated_search(s, enter, exit):
+    plan = [(enter, 1)] 
+    while !plan.empty():
+	node = plan.pop()
+    
+
+
 s = """...#.#.#.#.....
 .###.#.#.#.#.##
 ...#.#...#.#.#.
