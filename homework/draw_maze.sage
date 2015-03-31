@@ -12,10 +12,40 @@ def draw_maze(s):
     return g
 
 def animated_search(s, enter, exit):
-    plan = [(enter, 1)] 
-    while !plan.empty():
-	node = plan.pop()
-    
+    return  
+
+def succ(v, N):
+    l = []
+    if v[0] != 0:
+        l.append((v[0] - 1, v[1]))
+    if v[1] != 0:
+        l.append((v[0], v[1] - 1))
+    if v[0] != N-1:
+        l.append((v[0] + 1, v[1]))
+    if v[1] != N-1:
+        l.append((v[0], v[1] + 1))
+    return l
+
+def solve_maze(s):
+    l = s.splitlines()
+    N = len(l)
+    ll = []
+    for st in l:
+        ll.append(list(l))
+    plan = [(0,0)]
+    while(len(plan) > 0):
+        v = plan.pop()
+        ll[v[0]][v[1]] = '1'
+        for x in succ(v, N):
+            if l[x[0]][x[1]] == '#':
+                continue
+            if x == (N - 1, N - 1):
+                print "YES"
+                return True
+            if ll[x[0]][x[1]] != '1':
+                plan.append(x)
+    print "NO"
+    return False
 
 
 s = """...#.#.#.#.....
@@ -34,4 +64,5 @@ s = """...#.#.#.#.....
 .#######.###.#.
 .#.........#.#."""
 
-show(draw_maze(s))
+#show(draw_maze(s))
+solve_maze(s)
