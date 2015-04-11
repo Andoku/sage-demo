@@ -50,11 +50,11 @@ def solve_maze(s, enter, exit):
 
 import random
 @interact
-def generate_maze(N = slider([0..10], default=7)):
+def generate_maze(N=7):
+#def generate_maze(N = slider([0..10], default=7)):
     D = (-2,0), (0,2), (2,0), (0,-2)
     Map = {(i,j):2-(i%2|j%2) for i in xrange(N) for j in xrange(N)}
-    #Todo = [(N/2&-2,N/2&-2)] if random.randrange(2) else [(0,0),(N-1,N-1)]
-    Todo = [(0,0),(N-1,N-1)]
+    Todo = [(int(N/2)&-2,int(N/2)&-2)] if random.randrange(2) else [(0,0),(N-1,N-1)]
     for x,y in Todo:
         Map[x,y]=0
 
@@ -68,7 +68,8 @@ def generate_maze(N = slider([0..10], default=7)):
     res = ""
     for i in xrange(N):
         res += "".join(".#"[Map[i,j]] for j in xrange(N)) + '\n'
-    a = solve_maze(res, (0,0), (N,N))
+    a = solve_maze(res, (0,0), (N - 1, N - 1))
     a.show(delay=20)
     return a
 
+generate_maze()
